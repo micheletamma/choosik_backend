@@ -12,6 +12,7 @@ class Utente(models.Model):
     #user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user')
     username = models.CharField(max_length=64, null=False, blank=False, unique=True)
     password = models.CharField(max_length=64, null=False, blank=False)
+    email = models.CharField(max_length=64, null=False, blank=False)
     nome = models.CharField(max_length=64, null=True, blank=True)
     citta = models.CharField(max_length=64, null=True, blank=True)
     provincia = models.CharField(max_length=64, null=True, blank=True)
