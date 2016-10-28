@@ -54,7 +54,7 @@ class Tour(models.Model):
         verbose_name_plural = 'Tours'
 
     def __unicode__(self):
-        return self.nome + ' -di- ' + self.artista.nome
+        return self.nome + ' -di- ' + self.artista.username
 
 class Tappa(models.Model):
     citta = models.CharField(max_length=64, null=False, blank=False)
