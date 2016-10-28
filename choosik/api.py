@@ -30,7 +30,8 @@ class UtenteResource(ModelResource):
         allowed_methods = ['post', 'get']
         filtering = {
             "username": ('exact',),
-            "password": ('exact',)
+            "password": ('exact',),
+            "artista":('exact',),
         }
 
 
