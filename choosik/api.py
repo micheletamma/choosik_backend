@@ -1,5 +1,6 @@
 from tastypie import fields
 from tastypie.authentication import ApiKeyAuthentication
+from tastypie.constants import ALL_WITH_RELATIONS
 from tastypie.resources import ModelResource
 from tastypie.authorization import Authorization
 from models import *
@@ -62,6 +63,7 @@ class TappaResource(ModelResource):
         allowed_methods = ['get',]
         filtering = {
             "citta": ('exact',),
+            "data": ('exact',),
         }
 
 class CanzoneInTappaResource(ModelResource):
@@ -73,3 +75,6 @@ class CanzoneInTappaResource(ModelResource):
         queryset = CanzoneInTappa.objects.all()
         resource_name = 'canzoneintappa'
         authorization = Authorization()
+        filtering = {
+            "tappa": ALL_WITH_RELATIONS,
+        }
