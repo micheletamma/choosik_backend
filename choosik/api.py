@@ -46,6 +46,7 @@ class CanzoneResource(ModelResource):
 
 class TourResource(ModelResource):
     artista = fields.ForeignKey(UtenteResource, 'artista', full=True)
+    nomeTour = fields.CharField('nome')
 
     class Meta:
         queryset = Tour.objects.all()
@@ -56,6 +57,7 @@ class TourResource(ModelResource):
 class TappaResource(ModelResource):
 
     tour = fields.ForeignKey(TourResource, 'tour', full=True)
+
 
     class Meta:
         queryset = Tappa.objects.all()
