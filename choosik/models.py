@@ -85,6 +85,7 @@ class CanzoneInTappa(models.Model):
 class VotoCanzoneInTappa(models.Model):
     utente = models.ForeignKey(Utente)
     canzoneInTappa = models.ForeignKey(CanzoneInTappa)
+    votoNum = models.IntegerField()
 
     class Meta:
         unique_together = (("utente", "canzoneInTappa"),)

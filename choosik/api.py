@@ -32,6 +32,9 @@ class UtenteResource(ModelResource):
             "username": ('exact',),
             "password": ('exact',),
             "artista":('exact',),
+            "nome": ('exact',),
+
+            
         }
 
 
@@ -81,3 +84,16 @@ class CanzoneInTappaResource(ModelResource):
         filtering = {
             "tappa": ALL_WITH_RELATIONS,
         }
+class VotoCanzoneInTappa(ModelResource):
+
+    utente = fields.ForeignKey(UtenteResource, 'utente', full=True)
+    canzoneInTappa = fields.ForeignKey(CanzoneInTappaResource, 'canzoneInTappa', full=True)
+
+    class Meta:
+        queryset = VotoCanzoneInTappa.objects.all()
+        resource_name = 'votocanzoneintappa'
+        authorization = Authorization()
+
+class MieiConcertiResource(ModelResource):
+
+    pass
