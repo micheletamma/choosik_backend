@@ -70,6 +70,8 @@ class TappaResource(ModelResource):
         filtering = {
             "citta": ('exact',),
             "data": ('exact',),
+            "id":('exact',),
+
         }
 
 class CanzoneInTappaResource(ModelResource):
@@ -95,5 +97,20 @@ class VotoCanzoneInTappaResource(ModelResource):
         authorization = Authorization()
 
 class MieiConcertiResource(ModelResource):
+
+
+    # la querset di tappa andra' filtrata in base a varie informazioni prelevate da vari modelli, le informazioni
+    # verranno prelevate nel metodo get_object_list.
+    class Meta:
+        queryset = Tappa.objects.all()
+
+
+    def get_object_list(self, request):
+
+        username = request.GET['username']
+
+
+
+        return super(MieiConcertiResource, self).get_object_list(request).filter()
 
     pass
