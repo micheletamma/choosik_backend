@@ -34,7 +34,7 @@ class UtenteResource(ModelResource):
             "artista":('exact',),
             "nome": ('exact',),
 
-            
+
         }
 
 
@@ -84,7 +84,7 @@ class CanzoneInTappaResource(ModelResource):
         filtering = {
             "tappa": ALL_WITH_RELATIONS,
         }
-class VotoCanzoneInTappa(ModelResource):
+class VotoCanzoneInTappaResource(ModelResource):
 
     utente = fields.ForeignKey(UtenteResource, 'utente', full=True)
     canzoneInTappa = fields.ForeignKey(CanzoneInTappaResource, 'canzoneInTappa', full=True)

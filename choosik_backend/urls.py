@@ -24,6 +24,7 @@ canzone_resource = CanzoneResource()
 tour_resource = TourResource()
 tappa_resource = TappaResource()
 canzoneInTappa_resource = CanzoneInTappaResource()
+votoCanzoneInTappa_resource = VotoCanzoneInTappaResource()
 
 
 
@@ -34,4 +35,5 @@ urlpatterns = [
     url(r'^api/', include(tour_resource.urls)),
     url(r'^api/', include(tappa_resource.urls)),
     url(r'^api/', include(canzoneInTappa_resource.urls)),
+    url(r'^api/', include(votoCanzoneInTappa_resource.urls)),
 ]
