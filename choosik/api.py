@@ -55,6 +55,9 @@ class TourResource(ModelResource):
         queryset = Tour.objects.all()
         resource_name = 'tour'
         authorization = Authorization()
+        filtering = {
+            "artista":ALL_WITH_RELATIONS,
+        }
 
 
 class TappaResource(ModelResource):
@@ -103,11 +106,15 @@ class MieiConcertiResource(ModelResource):
     # verranno prelevate nel metodo get_object_list.
     class Meta:
         queryset = Tappa.objects.all()
+        resource_name = 'mieiconcerti'
+        authorization = Authorization()
 
 
     def get_object_list(self, request):
 
         username = request.GET['username']
+        myVoti = VotoCanzoneInTappa.objects.filter(utente__username=username)
+        print myVoti.canzoneInTappa.canzone.titolo
 
 
 
