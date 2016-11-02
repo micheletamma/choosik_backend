@@ -89,6 +89,7 @@ class CanzoneInTappaResource(ModelResource):
         authorization = Authorization()
         filtering = {
             "tappa": ALL_WITH_RELATIONS,
+            "canzone": ALL_WITH_RELATIONS,
         }
 class VotoCanzoneInTappaResource(ModelResource):
 
