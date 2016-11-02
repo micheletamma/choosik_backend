@@ -102,6 +102,7 @@ class VotoCanzoneInTappaResource(ModelResource):
 
 class MieiConcertiResource(ModelResource):
 
+    tour = fields.ForeignKey(TourResource, 'tour', full=True)
 
     # la querset di tappa andra' filtrata in base a varie informazioni prelevate da vari modelli, le informazioni
     # verranno prelevate nel metodo get_object_list.
