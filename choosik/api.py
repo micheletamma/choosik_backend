@@ -56,7 +56,7 @@ class TourResource(ModelResource):
         resource_name = 'tour'
         authorization = Authorization()
         filtering = {
-            "artista":ALL_WITH_RELATIONS,
+            "artista": ALL_WITH_RELATIONS,
         }
 
 
@@ -74,6 +74,7 @@ class TappaResource(ModelResource):
             "citta": ('exact',),
             "data": ('exact',),
             "id":('exact',),
+            "tour": ALL_WITH_RELATIONS,
 
         }
 
