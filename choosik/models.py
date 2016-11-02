@@ -91,3 +91,6 @@ class VotoCanzoneInTappa(models.Model):
         unique_together = (("utente", "canzoneInTappa"),)
         verbose_name = 'Voto canzone in tappa'
         verbose_name_plural = 'Voti canzone in tappa'
+
+    def __unicode__(self):
+        return self.utente.username + ' ' + self.canzoneInTappa.canzone.titolo + ' ' + unicode(self.canzoneInTappa.tappa.data) + ' ' + self.canzoneInTappa.tappa.citta
