@@ -80,7 +80,7 @@ class CanzoneInTappa(models.Model):
         verbose_name_plural = 'Canzoni in tappa'
 
     def __unicode__(self):
-        return self.canzone.titolo
+        return self.canzone.titolo + self.tappa.citta + unicode(self.tappa.data) + self.tappa.tour.nome
 
 class VotoCanzoneInTappa(models.Model):
     utente = models.ForeignKey(Utente)

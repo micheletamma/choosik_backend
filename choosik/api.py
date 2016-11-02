@@ -110,15 +110,15 @@ class MieiConcertiResource(ModelResource):
         resource_name = 'mieiconcerti'
         authorization = Authorization()
 
-
+    # la return di questo metodo si riferisce al campo queryset del Meta, dunque fa un filtraggio sugli id delle tappe
+    # dove l'utente ha votato almeno una canzone.
     def get_object_list(self, request):
 
         username = request.GET['username']
         myVoti = VotoCanzoneInTappa.objects.filter(utente__username=username)
-        print myVoti.canzoneInTappa.canzone.titolo
-
-
-
-        return super(MieiConcertiResource, self).get_object_list(request).filter()
-
-    pass
+        myVoti = list(myVoti)
+        mytappeIds = list()
+        for v in myVoti:
+            if not (mytappeIds.__contains__(v.canzoneInTappa.tappa.id)):
+                mytappeIds.append(v.canzoneInTappa.tappa.id)
+        return super(MieiConcertiResource, self).get_object_list(request).filter(id__in = mytappeIds)
