@@ -69,7 +69,7 @@ class TappaResource(ModelResource):
         queryset = Tappa.objects.all()
         resource_name = 'tappa'
         authorization = Authorization()
-        allowed_methods = ['get',]
+        allowed_methods = ['get','post']
         filtering = {
             "citta": ('exact',),
             "data": ('exact',),
