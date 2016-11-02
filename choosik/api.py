@@ -131,3 +131,31 @@ class MieiConcertiResource(ModelResource):
             if not (mytappeIds.__contains__(v.canzoneInTappa.tappa.id)):
                 mytappeIds.append(v.canzoneInTappa.tappa.id)
         return super(MieiConcertiResource, self).get_object_list(request).filter(id__in = mytappeIds)
+
+class CanzoniInTappaVotateResource(ModelResource):
+
+    class Meta:
+        queryset = CanzoneInTappa.objects.all()
+        resource_name = 'canzoniintappavotate'
+        authorization = Authorization()
+        filtering = {
+            "tappa": ALL_WITH_RELATIONS,
+            "canzone": ALL_WITH_RELATIONS,
+            "id":('exact',),
+        }
+
+    canzone = fields.ForeignKey(CanzoneResource, 'canzone', full=True)
+    tappa = fields.ForeignKey(TappaResource, 'tappa', full=True)
+    
+    def get_object_list(self, request):
+        return super(CanzoniInTappaVotateResource, self).get_object_list(request).filter(tappa=request.GET['idTappa'])
+
+    # viene passato al vaglio ogni canzone in tappa.
+    def dehydrate(self, bundle):
+        username = bundle.request.GET['username']
+        idCanzoneInTappa = bundle.data['id']
+        if VotoCanzoneInTappa.objects.filter(canzoneInTappa=idCanzoneInTappa, utente__username=username).__len__() == 1:
+            bundle.data['votata'] = True
+        else:
+            bundle.data['votata'] = False
+        return super(CanzoniInTappaVotateResource, self).dehydrate(bundle)

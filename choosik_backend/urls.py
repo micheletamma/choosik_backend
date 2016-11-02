@@ -26,6 +26,7 @@ tappa_resource = TappaResource()
 canzoneInTappa_resource = CanzoneInTappaResource()
 votoCanzoneInTappa_resource = VotoCanzoneInTappaResource()
 mieiConcerti_resource = MieiConcertiResource()
+canzoniintappavotate_resource = CanzoniInTappaVotateResource()
 
 
 
@@ -38,4 +39,5 @@ urlpatterns = [
     url(r'^api/', include(canzoneInTappa_resource.urls)),
     url(r'^api/', include(votoCanzoneInTappa_resource.urls)),
     url(r'^api/', include(mieiConcerti_resource.urls)),
+    url(r'^api/', include(canzoniintappavotate_resource.urls)),
 ]
