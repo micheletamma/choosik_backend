@@ -103,6 +103,9 @@ class VotoCanzoneInTappaResource(ModelResource):
         queryset = VotoCanzoneInTappa.objects.all()
         resource_name = 'votocanzoneintappa'
         authorization = Authorization()
+        filtering = {
+            "canzoneInTappa":ALL_WITH_RELATIONS,
+        }
 
 class MieiConcertiResource(ModelResource):
 
