@@ -44,6 +44,9 @@ class CanzoneResource(ModelResource):
         queryset = Canzone.objects.all()
         resource_name = 'canzone'
         authorization = Authorization()
+        filtering = {
+            "autore": ALL_WITH_RELATIONS,
+        }
 
 
 
