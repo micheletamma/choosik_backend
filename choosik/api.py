@@ -146,7 +146,7 @@ class CanzoniInTappaVotateResource(ModelResource):
 
     canzone = fields.ForeignKey(CanzoneResource, 'canzone', full=True)
     tappa = fields.ForeignKey(TappaResource, 'tappa', full=True)
-    
+
     def get_object_list(self, request):
         return super(CanzoniInTappaVotateResource, self).get_object_list(request).filter(tappa=request.GET['idTappa'])
 
@@ -154,8 +154,11 @@ class CanzoniInTappaVotateResource(ModelResource):
     def dehydrate(self, bundle):
         username = bundle.request.GET['username']
         idCanzoneInTappa = bundle.data['id']
-        if VotoCanzoneInTappa.objects.filter(canzoneInTappa=idCanzoneInTappa, utente__username=username).__len__() == 1:
+        voto = VotoCanzoneInTappa.objects.filter(canzoneInTappa=idCanzoneInTappa, utente__username=username)
+        if voto.__len__() == 1:
             bundle.data['votata'] = True
+            for v in voto:
+                bundle.data['numVoto'] = v.votoNum
         else:
             bundle.data['votata'] = False
         return super(CanzoniInTappaVotateResource, self).dehydrate(bundle)
