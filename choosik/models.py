@@ -45,7 +45,7 @@ class Canzone(models.Model):
         verbose_name_plural = 'Canzoni'
 
     def __unicode__(self):
-        return self.titolo + ' - ' + self.autore.nome
+        return self.titolo + ' - ' + unicode(self.autore.nome)
 
 
 class Tour(models.Model):
