@@ -60,6 +60,7 @@ class TourResource(ModelResource):
         authorization = Authorization()
         filtering = {
             "artista": ALL_WITH_RELATIONS,
+            "id": ('exact',),
         }
 
 
