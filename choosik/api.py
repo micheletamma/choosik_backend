@@ -62,6 +62,7 @@ class TourResource(ModelResource):
             "artista": ALL_WITH_RELATIONS,
             "id": ('exact',),
         }
+        allowed_methods = ['get', 'post', 'delete']
 
 
 class TappaResource(ModelResource):
@@ -73,7 +74,7 @@ class TappaResource(ModelResource):
         queryset = Tappa.objects.all()
         resource_name = 'tappa'
         authorization = Authorization()
-        allowed_methods = ['get','post']
+        allowed_methods = ['get','post', 'delete']
         filtering = {
             "citta": ('exact',),
             "data": ('exact',),
@@ -95,6 +96,8 @@ class CanzoneInTappaResource(ModelResource):
             "tappa": ALL_WITH_RELATIONS,
             "canzone": ALL_WITH_RELATIONS,
         }
+        allowed_methods = ['get', 'post', 'delete']
+        
 class VotoCanzoneInTappaResource(ModelResource):
 
     utente = fields.ForeignKey(UtenteResource, 'utente', full=True)
