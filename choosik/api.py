@@ -46,6 +46,7 @@ class CanzoneResource(ModelResource):
         authorization = Authorization()
         filtering = {
             "autore": ALL_WITH_RELATIONS,
+            "titolo":('contains',),
         }
 
 
@@ -97,7 +98,7 @@ class CanzoneInTappaResource(ModelResource):
             "canzone": ALL_WITH_RELATIONS,
         }
         allowed_methods = ['get', 'post', 'delete']
-        
+
 class VotoCanzoneInTappaResource(ModelResource):
 
     utente = fields.ForeignKey(UtenteResource, 'utente', full=True)
