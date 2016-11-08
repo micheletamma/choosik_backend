@@ -58,7 +58,10 @@ class CanzoneResource(ModelResource):
         orm_filters = super(CanzoneResource, self).build_filters(filters)
         if ('titolocontains' in filters):
             query = filters['titolocontains']
-            qset = query
+            #qset = query
+            qset = (
+                Q(titolo__icontains=query)
+            )
             print qset
             orm_filters.update({'custom': qset})
         return orm_filters
@@ -66,7 +69,8 @@ class CanzoneResource(ModelResource):
     def apply_filters(self, request, applicable_filters):
         if 'custom' in applicable_filters:
             custom = applicable_filters.pop('custom')
-            return Canzone.objects.filter(titolo__icontains=custom)
+            print custom
+            #return Canzone.objects.filter(titolo__icontains=custom)
         else:
             custom = None
 
