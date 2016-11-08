@@ -1,3 +1,4 @@
+from django.db.models import Q
 from tastypie import fields
 from tastypie.authentication import ApiKeyAuthentication
 from tastypie.constants import ALL_WITH_RELATIONS
@@ -47,8 +48,31 @@ class CanzoneResource(ModelResource):
         filtering = {
             "autore": ALL_WITH_RELATIONS,
             "titolo":('contains',),
+            "titolocontains": ['icontains',],
         }
 
+    def build_filters(self, filters=None):
+
+        if filters is None:  # if you don't pass any filters at all
+            filters = {}
+        orm_filters = super(CanzoneResource, self).build_filters(filters)
+        if ('titolocontains' in filters):
+            query = filters['titolocontains']
+            qset = query
+            print qset
+            orm_filters.update({'custom': qset})
+        return orm_filters
+
+    def apply_filters(self, request, applicable_filters):
+        if 'custom' in applicable_filters:
+            custom = applicable_filters.pop('custom')
+            return Canzone.objects.filter(titolo__icontains=custom)
+        else:
+            custom = None
+
+        semi_filtered = super(CanzoneResource, self).apply_filters(request, applicable_filters)
+
+        return semi_filtered.filter(custom) if custom else semi_filtered
 
 
 class TourResource(ModelResource):
