@@ -51,9 +51,13 @@ class CanzoneResource(ModelResource):
         }
 
     def get_object_list(self, request):
-        if request.GET['titoloContains']:
-            return super(CanzoneResource, self).get_object_list(request)\
-                .filter(titolo__icontains=request.GET['titoloContains'])
+        if request.GET:
+            try:
+                if request.GET['titoloSontains']:
+                    return super(CanzoneResource, self).get_object_list(request) \
+                        .filter(titolo__icontains=request.GET['titoloContains'])
+            except:
+                pass
         return super(CanzoneResource, self).get_object_list(request)
 
 
